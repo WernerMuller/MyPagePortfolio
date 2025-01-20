@@ -1,67 +1,47 @@
 <script>
-    import { onMount } from "svelte";
     import "flowbite";
-    import { Timeline, TimelineItem, Button } from 'flowbite-svelte';
-    import { Heading, P } from 'flowbite-svelte';
-    import { Indicator } from 'flowbite-svelte';
+    import {  Input, Textarea,Toast, Img, Li, List, Card, Avatar, Button, Heading, Indicator, TabItem, Tabs, Spinner  } from 'flowbite-svelte';
     import  image from "$lib/images/main.jpg"
     import  fullbaterias from "$lib/images/fullbaterias.png"
     import  fullneumaticos from "$lib/images/fullneumaticos.png"
     import  estetica from "$lib/images/dubo.png"
     import  oto from "$lib/images/oto.png"
-    import { Avatar, Tooltip } from 'flowbite-svelte';
-    import { Card } from 'flowbite-svelte';
-    import { Tabs, TabItem } from 'flowbite-svelte';
-    import {   DesktopPcSolid,  ShieldSolid, FireSolid,  HammerSolid, MobilePhoneSolid, RocketSolid,  StoreSolid, CodeBranchSolid,  CloudArrowUpSolid, ClockSolid } from 'flowbite-svelte-icons';
-    import { Li, List } from 'flowbite-svelte';
-    import { Img } from 'flowbite-svelte';
+    import { CheckCircleSolid, DesktopPcSolid,  ShieldSolid, FireSolid,  HammerSolid, MobilePhoneSolid, RocketSolid,  StoreSolid, CodeBranchSolid,  CloudArrowUpSolid, ClockSolid, EnvelopeSolid, AnnotationSolid  } from 'flowbite-svelte-icons';
+    import { slide } from 'svelte/transition';
+    import { setContext, getContext } from 'svelte';
+	  import { enhance } from "$app/forms";
+    
 
+   let { form } = $props();
+
+  let toastStatus = $state(false);
+  let counter = $state(5);
+  let loading = $state(false)
+  let disable = $state(false)
+ 
+
+  function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    
+  }
   
-    let email = "";
-    let subject = "";
-    let message = "";
-    let successMessage = "";
-    let errorMessage = "";
-  
-    const sendEmail = async () => {
-      if (!email || !subject || !message) {
-        errorMessage = "Todos los campos son obligatorios.";
-        successMessage = "";
-        return;
-      }
-  
-      try {
-        const response = await fetch("https://api.emailservice.com/send", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            subject,
-            message,
-          }),
-        });
-  
-        if (response.ok) {
-          successMessage = "Correo enviado con éxito.";
-          errorMessage = "";
-          email = "";
-          subject = "";
-          message = "";
-        } else {
-          errorMessage = "Error al enviar el correo. Intente de nuevo.";
-          successMessage = "";
-        }
-      } catch (error) {
-        errorMessage = "No se pudo conectar al servidor.";
-        successMessage = "";
-      }
-    };
+
   </script>
   
   <main class="bg-primary text-secondary min-h-screen flex flex-col">
+
     
+    {#if form?.success}
+
+  
+      <Toast dismissable={true} transition={slide} bind:toastStatus position="top-left" class="sticky">
+        <CheckCircleSolid slot="icon" class="w-5 h-5 " color="green"/>
+        <p class="text-lg text-secondary">Correo Enviado!</p>
+      </Toast>
+
+      
+    {/if}
     
   
     <section id="informacion" class="py-8" >
@@ -85,6 +65,7 @@
                 <span class="flex items-center"><Indicator size="sm" color="orange" class="me-1.5" />Svelte</span>
                 <span class="flex items-center"><Indicator size="sm" color="teal" class="me-1.5" />React</span>
                 <span class="flex items-center"><Indicator size="sm" color="dark" class="me-1.5" />Next.js</span>
+                <span class="flex items-center"><Indicator size="sm" color="teal" class="me-1.5" />Typescript</span>
                 <span class="flex items-center"><Indicator size="sm" color="yellow" class="me-1.5" />Javascript</span>
                 <span class="flex items-center"><Indicator size="sm" color="green" class="me-1.5" />Node.js</span>
                 <span class="flex items-center"><Indicator size="sm" color="teal" class="me-1.5" />Php</span>
@@ -290,61 +271,57 @@
             <h1 class="text-2xl font-bold mb-4 text-center">Contactame</h1>
             
     
-            {#if successMessage}
-              <div class="bg-green-700 text-white p-3 rounded mb-4">
-                {successMessage}
-              </div>
-            {/if}
-    
-            {#if errorMessage}
-              <div class="bg-red-700 text-white p-3 rounded mb-4">
-                {errorMessage}
-              </div>
-            {/if}
-    
-            <form on:submit|preventDefault={sendEmail}>
-              <div class="mb-4">
-                
-                <input
-                  id="email"
-                  type="email"
-                  bind:value={email}
-                  class="border border-gray-600 bg-accent text-secondary rounded w-full p-2 focus:ring focus:ring-blue-500"
-                  required
-                  placeholder="Correo Electrónico"
-                />
-              </div>
-    
-              <div class="mb-4">
+            <form method="POST" action="?/send" use:enhance={() => {
+              loading = true;
+              toastStatus = true;
+              disable = true;
               
-                <input
-                  id="subject"
-                  type="text"
-                  bind:value={subject}
-                  class="border border-gray-600 bg-accent text-secondary rounded w-full p-2 focus:ring focus:ring-blue-500"
-                  required
-                  placeholder="Asunto"
-                />
+              
+              return async ({  update }) => {
+               await update()
+                timeout();
+                loading = false;
+                disable = false;
+              };
+            }}>
+              <div class="mb-4">
+              <Input id="email" type="email" name="email" placeholder="Correo Electrónico" required disabled={disable}>
+                <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+              </Input>
               </div>
     
               <div class="mb-4">
-           
-                <textarea
+                <Input id="subject" type="text" placeholder="Asunto" name="subject" required disabled={disable}>
+                  <AnnotationSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                </Input>
+              </div>
+
+              
+    
+              <div class="mb-4">
+                <Textarea 
                   id="message"
-                  bind:value={message}
-                  class="border border-secondary bg-accent text-secondary rounded w-full p-2 focus:ring focus:ring-blue-500"
-                  rows="5"
+                  name="mensaje"
+                  class="text-gray-500 dark:text-gray-400"
+                  rows={5}
                   required
+                  disabled={disable}
                   placeholder="Mensaje"
-                ></textarea>
+                ></Textarea>
               </div>
     
-              <button
-                type="submit"
-                class="bg-ternary text-secondary font-medium py-2 px-4 rounded-xl border-2 hover:border-secondary w-full"
-              >
+              
+
+              <Button class="bg-ternary w-full" type="submit" > 
+
+                {#if loading === true}
+                <Spinner class="me-3" size="4" color="green" />  
+                {:else} 
                 Enviar
-              </button>
+                {/if}
+                
+              
+              </Button>
             </form>
           </div>
     
@@ -352,7 +329,7 @@
         </div>
       </section>
   
-   
+      
   </main>
   
   <style>
