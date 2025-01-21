@@ -1,19 +1,17 @@
 <script>
     import "flowbite";
     import {  Input, Textarea,Toast, Img, Li, List, Card, Avatar, Button, Heading, Indicator, TabItem, Tabs, Spinner  } from 'flowbite-svelte';
-    import  image from "$lib/images/main.jpg"
     import  fullbaterias from "$lib/images/fullbaterias.png"
     import  fullneumaticos from "$lib/images/fullneumaticos.png"
     import  estetica from "$lib/images/dubo.png"
     import  oto from "$lib/images/oto.png"
-    import { CheckCircleSolid, DesktopPcSolid,  ShieldSolid, FireSolid,  HammerSolid, MobilePhoneSolid, RocketSolid,  StoreSolid, CodeBranchSolid,  CloudArrowUpSolid, ClockSolid, EnvelopeSolid, AnnotationSolid  } from 'flowbite-svelte-icons';
+    import me from "$lib/images/maybe.jpeg"
+    import { CheckCircleSolid, DesktopPcSolid,  ShieldSolid,  FireSolid, LinkedinSolid,  HammerSolid, MobilePhoneSolid, RocketSolid,  StoreSolid, CodeBranchSolid,  CloudArrowUpSolid, ClockSolid, EnvelopeSolid, AnnotationSolid  } from 'flowbite-svelte-icons';
     import { slide } from 'svelte/transition';
-    import { setContext, getContext } from 'svelte';
 	  import { enhance } from "$app/forms";
     
 
    let { form } = $props();
-
   let toastStatus = $state(false);
   let counter = $state(5);
   let loading = $state(false)
@@ -47,18 +45,20 @@
     <section id="informacion" class="py-8" >
         <div class="container mx-auto px-4 ">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="text-secondary flex  justify-center grid-cols-2">
+
+            <div class="grid justify-center items-center ">
               
-              <Avatar data-name="Jese Leos"  src={image} size="none" class="w-80 h-80"/>
+              <Avatar data-name="Jese Leos"  src={me} size="none" class="w-96 h-96"/>
               
             </div>
+
             <div class="grid justify-start items-center grid-rows-2 ">
 
-              <div class="grid grid-rows-2">
+              <div class="grid text-wrap">
                 <Heading tag="h1" class="mb-2" customSize="text-4xl font-extrabold">Werner Müller Hudats</Heading>
                 <Heading tag="h2"  class="text-xl font-bold mb-2">Fullstack web-developer</Heading>
-                <p class="text-lg text-gray-500 dark:text-gray-400">soy un apasionado y experimentado Desarrollador Web con enfoque tanto en el desarrollo front-end como en el back-end.
-                  Tengo 6 años de experiencia en la industria del desarrollo web, trabajando en una variedad de proyectos y tecnologías.</p>
+                <p class="text-lg text-gray-500 dark:text-gray-400">Desarrollador Web con enfoque tanto en el desarrollo front-end como en el back-end. <br>
+                  Tengo 6 años de experiencia en la industria del desarrollo web, trabajando en una <br>variedad de proyectos y tecnologías.</p>
               </div>
               
               <div class="grid grid-cols-4">
@@ -84,9 +84,17 @@
     
     <section id="servicios" >
         <div class="container mx-auto px-4">
+         
+            
+         
           <h2 class="text-xl font-bold mb-4 text-center">Servicios</h2>
-        <div class="grid md:grid-cols-3 gap-10 sm:grid-cols-1">
-          <Card>
+
+
+
+        <div class="grid md:grid-cols-3  grid-cols-1 gap-y-10 grid-rows-4 justify-items-center place-items-stretch justify-between">
+
+         
+          <Card >
             <DesktopPcSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Diseño y desarrollo de sitios web</h5>
@@ -97,8 +105,8 @@
               <Li>Sitios web informativos o blogs.</Li>
             </List>
           </Card>
-
-          <Card>
+       
+          <Card >
             <HammerSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Desarrollo a medida</h5>
@@ -108,8 +116,8 @@
               <Li>Backend con Node.js, o PHP (Laravel).</Li>
             </List>
           </Card>
-
-          <Card>
+       
+          <Card >
             <StoreSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Integración de CMS (Gestores de contenido)</h5>
@@ -118,8 +126,8 @@
               <Li>WordPress o plataformas similares para facilitar a los clientes la administración de sus contenidos.</Li>
             </List>
           </Card>
-         
-          <Card>
+       
+          <Card >
             <MobilePhoneSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Optimización para dispositivos móviles</h5>
@@ -128,9 +136,7 @@
               <Li>Diseño responsive para garantizar que el sitio funcione bien en móviles, tablets y escritorio.</Li>
             </List>
           </Card>
-
-          
-
+      
           <Card>
             <ShieldSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -140,7 +146,7 @@
               <Li>Implementación de certificados SSL.</Li>
             </List>
           </Card>
-
+       
           <Card>
             <FireSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -152,7 +158,7 @@
             </List>
           </Card>
 
-
+      
           <Card>
             <RocketSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -163,7 +169,8 @@
               <Li>Instalación de herramientas como Google Analytics o Google Search Console.</Li>
             </List>
           </Card>
-
+   
+    
           <Card>
             <CodeBranchSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -173,7 +180,8 @@
               <Li>Migración desde un CMS o servidor a otro.</Li>
             </List>
           </Card>
-
+      
+    
           <Card>
             <CloudArrowUpSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -184,7 +192,8 @@
               <Li>Asistencia en la compra y configuración de dominios.</Li>
             </List>
           </Card>
-
+   
+    
           <Card>
             <ClockSolid class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" />
             <a href="/">
@@ -194,10 +203,10 @@
               <Li>Respuesta rápida a problemas críticos.</Li>
             </List>
           </Card>
-
+       
         </div>
-          
-        </div>
+      </div>
+       
       </section>
 
       <section id="envio-correos" class="flex-grow flex items-center justify-center py-8">
@@ -265,64 +274,91 @@
         </div>
       </section>
   
-    <section id="envio-correos" class="flex-grow flex items-center justify-center py-8">
-        <div class="container mx-auto px-4 flex justify-center">
-          <div class=" p-8 rounded w-full max-w-3xl ">
-            <h1 class="text-2xl font-bold mb-4 text-center">Contactame</h1>
+    <section id="envio-correos" class="py-8">
+        <div class="container mx-auto">
+          <div class="p-8 grid-rows-2">
+
+            <div>
+              <h1 class="text-2xl font-bold mb-4 text-center">Contáctame</h1>
+            </div>
             
+            <div class="grid grid-cols-2">
+              <div>
+                <form method="POST" action="?/send" use:enhance={() => {
+                  loading = true;
+                  toastStatus = true;
+                  disable = true;
+                  
+                  
+                  return async ({  update }) => {
+                   await update()
+                    timeout();
+                    loading = false;
+                    disable = false;
+                  };
+                }}>
+                  <div class="mb-4">
+                  <Input id="email" type="email" name="email" placeholder="Correo Electrónico" required disabled={disable}>
+                    <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                  </Input>
+                  </div>
+        
+                  <div class="mb-4">
+                    <Input id="subject" type="text" placeholder="Asunto" name="subject" required disabled={disable}>
+                      <AnnotationSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                    </Input>
+                  </div>
     
-            <form method="POST" action="?/send" use:enhance={() => {
-              loading = true;
-              toastStatus = true;
-              disable = true;
-              
-              
-              return async ({  update }) => {
-               await update()
-                timeout();
-                loading = false;
-                disable = false;
-              };
-            }}>
-              <div class="mb-4">
-              <Input id="email" type="email" name="email" placeholder="Correo Electrónico" required disabled={disable}>
-                <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              </Input>
-              </div>
+                  
+        
+                  <div class="mb-4">
+                    <Textarea 
+                      id="message"
+                      name="mensaje"
+                      class="text-gray-500 dark:text-gray-400"
+                      rows={5}
+                      required
+                      disabled={disable}
+                      placeholder="Mensaje"
+                    ></Textarea>
+                  </div>
+        
+                  
     
-              <div class="mb-4">
-                <Input id="subject" type="text" placeholder="Asunto" name="subject" required disabled={disable}>
-                  <AnnotationSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                </Input>
+                  <Button class="bg-ternary w-full" type="submit" > 
+    
+                    {#if loading === true}
+                    <Spinner class="me-3" size="4" color="green" />  
+                    {:else} 
+                    Enviar
+                    {/if}
+                    
+                  
+                  </Button>
+                </form>
               </div>
 
-              
-    
-              <div class="mb-4">
-                <Textarea 
-                  id="message"
-                  name="mensaje"
-                  class="text-gray-500 dark:text-gray-400"
-                  rows={5}
-                  required
-                  disabled={disable}
-                  placeholder="Mensaje"
-                ></Textarea>
-              </div>
-    
-              
-
-              <Button class="bg-ternary w-full" type="submit" > 
-
-                {#if loading === true}
-                <Spinner class="me-3" size="4" color="green" />  
-                {:else} 
-                Enviar
-                {/if}
+              <div class="grid pl-4 justify-center">
+                <div>
+                  <Card>
                 
-              
-              </Button>
-            </form>
+                      <Heading tag="h2" class="text-xl font-bold mb-4">Consulta</Heading>
+                
+                    <p class="text-lg text-gray-500 dark:text-gray-400">Sígueme y escríbeme en mi LinkedIn personal para cualquier pregunta que tengas.</p>
+                    <a href="https://www.linkedin.com/in/werner-augusto-müller-hudats-781a3a143" class="pt-4">
+                      <Button  class="!p-2 bg-ternary" size="lg">
+                        <LinkedinSolid  />
+                      </Button>
+                    </a>
+                  </Card>
+                </div>
+                
+             
+              </div>
+            
+            </div>
+    
+           
           </div>
     
          
