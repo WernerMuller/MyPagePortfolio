@@ -345,7 +345,7 @@
                       <Heading tag="h2" class="text-xl font-bold mb-4">Consulta</Heading>
                 
                     <p class="text-lg text-gray-500 dark:text-gray-400">Sígueme y escríbeme en mi LinkedIn personal para cualquier pregunta que tengas.</p>
-                    <a href="https://www.linkedin.com/in/werner-augusto-müller-hudats-781a3a143" class="pt-4">
+                    <a href="https://www.linkedin.com/in/werner-augusto-m%C3%BCller-hudats-781a3a143/" class="pt-4">
                       <Button  class="!p-2 bg-ternary" size="lg">
                         <LinkedinSolid  />
                       </Button>
