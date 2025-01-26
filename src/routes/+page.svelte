@@ -1,6 +1,6 @@
 <script>
     import "flowbite";
-    import {  Input, Textarea,Toast, Img, Li, List, Card, Avatar, Button, Heading, Indicator, TabItem, Tabs, Spinner  } from 'flowbite-svelte';
+    import {  Input, Textarea,Toast, Img, Li, List, Card, Avatar, Button, Heading, Indicator, TabItem, Tabs, Spinner, Tooltip  } from 'flowbite-svelte';
     import  fullbaterias from "$lib/images/fullbaterias.png"
     import  fullneumaticos from "$lib/images/fullneumaticos.png"
     import  estetica from "$lib/images/dubo.png"
@@ -11,7 +11,7 @@
 	  import { enhance } from "$app/forms";
     
 
-   let { form } = $props();
+  let { form } = $props();
   let toastStatus = $state(false);
   let counter = $state(5);
   let loading = $state(false)
@@ -21,7 +21,6 @@
   function timeout() {
     if (--counter > 0) return setTimeout(timeout, 1000);
     toastStatus = false;
-    
   }
   
 
@@ -282,8 +281,8 @@
               <h1 class="text-2xl font-bold mb-4 text-center">Contáctame</h1>
             </div>
             
-            <div class="grid grid-cols-2">
-              <div>
+            <div class="grid grid-cols-1">
+             <!--  <div>
                 <form method="POST" action="?/send" use:enhance={() => {
                   loading = true;
                   toastStatus = true;
@@ -336,23 +335,24 @@
                   
                   </Button>
                 </form>
-              </div>
+              </div> -->
 
               <div class="grid pl-4 justify-center">
                 <div>
-                  <Card>
-                
-                      <Heading tag="h2" class="text-xl font-bold mb-4">Consulta</Heading>
-                
-                    <p class="text-lg text-gray-500 dark:text-gray-400">Sígueme y escríbeme en mi LinkedIn personal para cualquier pregunta que tengas.</p>
-                    <a href="https://www.linkedin.com/in/werner-augusto-m%C3%BCller-hudats-781a3a143/" class="pt-4">
+                  <Card size="xl">
+                    <p class="text-lg text-gray-500 dark:text-gray-400">Escríbeme en mi LinkedIn personal para cualquier pregunta que tengas.</p>
+
+                    <div class="flex justify-center">
+                    <a href="https://www.linkedin.com/in/werner-augusto-m%C3%BCller-hudats-781a3a143/" class="pt-4" id="LinkedinSolid2">
                       <Button  class="!p-2 bg-ternary" size="lg">
                         <LinkedinSolid  />
                       </Button>
                     </a>
+                  </div>
+
                   </Card>
                 </div>
-                
+                <Tooltip triggeredBy="#LinkedinSolid2">linkedin</Tooltip>
              
               </div>
             
